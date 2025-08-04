@@ -1,312 +1,88 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عمر الخياط - مهندس برمجيات</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <title>Omar Alkhayat - Software Engineer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Cairo', sans-serif;
-      background-color: #f4f6f9;
-      color: #333;
-      line-height: 1.7;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      min-height: 100vh;
-      background-color: #fff;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* الشريط الجانبي */
-    .sidebar {
-      width: 30%;
-      background: #1a3a5f;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .sidebar .photo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #fff;
-      margin: 0 auto 20px;
-      background-color: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      color: #aaa;
-    }
-
-    .sidebar h1 {
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-
-    .sidebar p.title {
-      color: #8cd0e5;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .contact-info {
-      text-align: right;
-      margin: 30px 0;
-      font-size: 15px;
-    }
-
-    .contact-info div {
-      margin: 15px 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .contact-info i {
-      width: 35px;
-      height: 35px;
-      background: #2c5282;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 10px;
-    }
-
-    .section {
-      margin: 25px 0;
-    }
-
-    .section h3 {
-      color: #8cd0e5;
-      border-bottom: 2px solid #8cd0e5;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-    }
-
-    .section ul {
-      list-style: none;
-    }
-
-    .section ul li {
-      margin: 8px 0;
-    }
-
-    /* المحتوى الرئيسي */
-    .main-content {
-      width: 70%;
-      padding: 40px;
-    }
-
-    .main-content h2 {
-      color: #1a3a5f;
-      margin-bottom: 20px;
-      font-size: 22px;
-    }
-
-    .summary p {
-      text-align: justify;
-      background: #f0f7ff;
-      padding: 15px;
-      border-radius: 8px;
-      border-right: 4px solid #1a3a5f;
-    }
-
-    .projects .project {
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px dashed #ccc;
-    }
-
-    .projects .project:last-child {
-      border-bottom: none;
-    }
-
-    .projects .role {
-      font-weight: 600;
-      color: #1a3a5f;
-    }
-
-    .education li, .courses li {
-      margin-bottom: 15px;
-    }
-
-    .skills .skill-category {
-      margin-bottom: 15px;
-    }
-
-    .skills .skill-category h4 {
-      color: #1a3a5f;
-      margin-bottom: 5px;
-    }
-
-    .certificates ul li::before {
-      content: "📄";
-      margin-right: 8px;
-    }
-
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-      }
-      .sidebar, .main-content {
-        width: 100%;
-      }
-      .sidebar {
-        text-align: center;
-      }
-      .contact-info div {
-        justify-content: center;
-        text-align: center;
-      }
-      .contact-info div span {
-        order: -1;
-      }
-    }
-  </style>
 </head>
-<body>
+<body class="light-mode" id="body">
+  <button id="theme-toggle" onclick="toggleDarkMode()">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <div class="container">
-    <!-- الشريط الجانبي -->
-    <div class="sidebar">
-      <div class="photo">
+    <aside class="sidebar">
+      <div class="profile-img">
         <i class="fas fa-user"></i>
       </div>
-      <h1>عمر علي الخياط</h1>
-      <p class="title">مهندس برمجيات (خلفي)</p>
+      <h1>Omar Ali Alkhayat</h1>
+      <p class="title">Backend Software Engineer</p>
 
-      <div class="contact-info">
-        <div>
-          <i class="fas fa-phone"></i>
-          <span>+963 982 860 955</span>
-        </div>
-        <div>
-          <i class="fas fa-envelope"></i>
-          <span>omaralkhayat09@gmail.com</span>
-        </div>
-        <div>
-          <i class="fab fa-github"></i>
-          <span>github.com/omaralkhayat</span>
-        </div>
-        <div>
-          <i class="fab fa-linkedin"></i>
-          <span>linkedin.com/in/omaralkhayat</span>
-        </div>
+      <div class="contact">
+        <p><i class="fas fa-phone"></i> +963 982 860 955</p>
+        <p><i class="fas fa-envelope"></i> omaralkhayat09@gmail.com</p>
+        <p><i class="fab fa-github"></i> github.com/omaralkhayat</p>
+        <p><i class="fab fa-linkedin"></i> linkedin.com/in/omaralkhayat</p>
       </div>
 
-      <div class="section">
-        <h3><i class="fas fa-globe"></i> اللغة</h3>
+      <div class="skills">
+        <h3>Technical Skills</h3>
         <ul>
-          <li>العربية: اللغة الأم</li>
-          <li>الإنجليزية: جيدة (كتابة ومحادثة)</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3><i class="fas fa-laptop-code"></i> المهارات التقنية</h3>
-        <ul>
-          <li>Python, C++, HTML, JavaScript</li>
-          <li>Django, Django REST Framework</li>
+          <li>Python, C++, HTML, JS</li>
+          <li>Django, REST APIs</li>
           <li>MySQL, SQL Server</li>
-          <li>Git, Linux, REST APIs</li>
+          <li>Git, Linux</li>
         </ul>
       </div>
+    </aside>
 
-      <div class="section">
-        <h3><i class="fas fa-star"></i> المهارات الشخصية</h3>
-        <ul>
-          <li>إدارة المشاريع</li>
-          <li>العمل الجماعي والقيادة</li>
-          <li>حل المشكلات الإبداعي</li>
-          <li>التواصل والتنظيم</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- المحتوى الرئيسي -->
-    <div class="main-content">
-      <section class="summary">
-        <h2><i class="fas fa-user-tie"></i> نبذة عني</h2>
+    <main class="main-content">
+      <section class="about">
+        <h2><i class="fas fa-user"></i> About Me</h2>
         <p>
-          مهندس برمجيات شغوف وذو دافع عالٍ، أمتلك أساسًا قويًا في البرمجة وحل المشكلات وإدارة المشاريع. أمتلك خبرة عملية في تطوير التطبيقات الخلفية باستخدام التقنيات الحديثة. أسعى باستمرار للتعلم والتطور والمساهمة في تقدم المجال التقني.
+          Highly motivated software engineer with a strong foundation in programming, problem-solving, and project management. Proficient in back-end development with hands-on experience in building robust applications using modern technologies. Passionate about continuous learning and contributing to the tech industry.
         </p>
       </section>
 
-      <section class="education">
-        <h2><i class="fas fa-graduation-cap"></i> التعليم</h2>
-        <ul>
-          <li>
-            <strong>علم الحاسوب</strong><br>
-            جامعة أنطاكية السورية<br>
-            <em>2021 - حتى الآن</em>
-          </li>
-        </ul>
-      </section>
-
-      <section class="courses">
-        <h2><i class="fas fa-book"></i> الدورات التدريبية</h2>
-        <ul>
-          <li>مقدمة في هندسة البرمجيات - IBM</li>
-          <li>مقدمة عملية لأوامر لينكس ونصوص الصدفة - IBM</li>
-          <li>التحكم بالإصدار باستخدام Git - IBM</li>
-          <li>تقنيات تطبيقات الويب وDjango - جامعة ميشيغان</li>
-          <li>مهارات الحاسوب - الجامعة</li>
-          <li>مهارات الاتصال - الجامعة</li>
-        </ul>
-      </section>
-
       <section class="projects">
-        <h2><i class="fas fa-project-diagram"></i> المشاريع</h2>
+        <h2><i class="fas fa-project-diagram"></i> Projects</h2>
         <div class="project">
-          <h3>مشروع بنك مالي</h3>
-          <p><span class="role">الدور:</span> قمت ببناء قسمي إدارة الفروع وإدارة الموظفين بالكامل، وعملت كقائد فريق في هذا المشروع.</p>
+          <h3>Finance Bank Project</h3>
+          <p>Built branch & employee management modules. Served as team leader.</p>
         </div>
         <div class="project">
-          <h3>مشروع محرك بحث جزئي</h3>
-          <p><span class="role">الدور:</span> بناء الواجهة الخلفية، قراءة المستندات، دمج Django مع Elastic Search، وإدارة الفهرسة.</p>
+          <h3>Partial Search Engine</h3>
+          <p>Backend development, document parsing, Django + Elastic Search integration.</p>
         </div>
         <div class="project">
-          <h3>مشروع إدارة أسطول مركبات</h3>
-          <p><span class="role">الدور:</span> بناء الواجهة الخلفية بالكامل لتتبع المركبات في الوقت الفعلي.</p>
+          <h3>Fleet Management System</h3>
+          <p>Developed full backend for real-time vehicle tracking.</p>
         </div>
         <div class="project">
-          <h3>تطبيق الطقس</h3>
-          <p><span class="role">الدور:</span> تطوير تطبيق يسمح للمستخدم بإضافة المدن المفضلة والبحث عن حالة الطقس حول العالم.</p>
+          <h3>Weather App</h3>
+          <p>Allows users to track weather in favorite cities worldwide.</p>
         </div>
       </section>
 
-      <section class="achievements">
-        <h2><i class="fas fa-award"></i> الإنجازات</h2>
-        <ul>
-          <li>تمكنت من إدارة وتسليم عدة مشاريع فردية وجماعية بنجاح.</li>
-          <li>تم التعرف عليّ بالتفكير الإبداعي وحل المشكلات المبتكر في مشاريع الجامعة.</li>
-        </ul>
+      <section class="education">
+        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+        <p><strong>Computer Science</strong> – Antioch Syrian University (2021 - Present)</p>
       </section>
 
       <section class="certificates">
-        <h2><i class="fas fa-certificate"></i> الشهادات</h2>
+        <h2><i class="fas fa-certificate"></i> Certificates</h2>
         <ul>
-          <li>مقدمة في هندسة البرمجيات - IBM</li>
-          <li>التحكم بالإصدار باستخدام Git - IBM</li>
-          <li>تقنيات تطبيقات الويب وDjango - جامعة ميشيغان</li>
+          <li>Introduction to Software Engineering - IBM</li>
+          <li>Git Version Control - IBM</li>
+          <li>Web Application Technologies - University of Michigan</li>
         </ul>
       </section>
-    </div>
+    </main>
   </div>
+
+  <script src="theme.js"></script>
 </body>
 </html>

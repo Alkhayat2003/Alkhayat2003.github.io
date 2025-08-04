@@ -1,16 +1,189 @@
-body {
-  font-family: Arial, sans-serif;
+/* التنسيق العام */
+* {
   margin: 0;
-  padding: 20px;
-  background-color: #f4f4f4;
+  padding: 0;
+  box-sizing: border-box;
 }
-header {
+
+body {
+  font-family: 'Open Sans', 'Cairo', sans-serif;
+  background: #f7f9fc;
+  color: #333;
+  line-height: 1.8;
+  transition: background 0.4s, color 0.4s;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* الشريط الجانبي */
+.sidebar {
+  width: 35%;
+  background: #1a3a5f;
+  color: #fff;
+  padding: 50px 30px;
   text-align: center;
+  position: relative;
+}
+
+.sidebar .profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #2c5282;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  border: 5px solid #fff;
+}
+
+.sidebar h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.sidebar .title {
+  color: #8cd0e5;
+  font-weight: 600;
   margin-bottom: 30px;
 }
-section {
-  background: white;
-  padding: 20px;
+
+.contact p {
+  direction: ltr;
+  text-align: right;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.contact i {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.skills h3 {
+  margin: 30px 0 15px;
+  color: #8cd0e5;
+}
+
+.skills ul {
+  list-style: none;
+  font-size: 14px;
+}
+
+.skills li {
+  margin: 8px 0;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+  width: 65%;
+  padding: 50px 40px;
+  background: #fff;
+}
+
+.main-content h2 {
+  color: #1a3a5f;
+  margin-bottom: 20px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-content section {
+  margin-bottom: 30px;
+}
+
+.project {
+  background: #f0f7ff;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-left: 4px solid #1a3a5f;
+}
+
+/* الأزرار */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #1a3a5f;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lang-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #1a3a5f;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* الوضع الليلي */
+.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .container {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .sidebar {
+  background: #0f202d;
+}
+
+.dark-mode .main-content {
+  background: #1e1e1e;
+  color: #ddd;
+}
+
+.dark-mode .project {
+  background: #2a2a2a;
+  border-left-color: #8cd0e5;
+}
+
+/* استجابة للجوال */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar, .main-content {
+    width: 100%;
+  }
+  .sidebar {
+    padding: 30px 20px;
+  }
+  .main-content {
+    padding: 30px 20px;
+  }
+  #theme-toggle, .lang-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0;
+  }
 }

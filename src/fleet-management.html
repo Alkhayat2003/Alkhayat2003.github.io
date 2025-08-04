@@ -1,259 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fleet Management Project | Omar Alkhayat</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --accent: #f97316;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #94a3b8;
-        }
+      :root {
+        --primary: #2563eb;
+        --secondary: #1e40af;
+        --accent: #f97316;
+        --dark: #0f172a;
+        --light: #f8fafc;
+        --gray: #94a3b8;
+      }
 
-        body {
-            background: linear-gradient(135deg, var(--dark), #1e293b);
-            color: var(--light);
-            line-height: 1.6;
-        }
+      body {
+        background: linear-gradient(135deg, var(--dark), #1e293b);
+        color: var(--light);
+        line-height: 1.6;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
 
-        header {
-            background: rgba(30, 41, 59, 0.7);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .nav-links a {
+        color: var(--light);
+        margin-left: 1.5rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .project-header {
+        text-align: center;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+      }
+
+      .project-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--accent);
+      }
+
+      .project-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--gray);
+      }
+
+      .project-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .detail-card {
+        background: rgba(30, 41, 59, 0.7);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .detail-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(37, 99, 235, 0.5);
+      }
+
+      .detail-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .detail-card ul {
+        list-style-type: none;
+      }
+
+      .detail-card li {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .detail-card li::before {
+        content: "▹";
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .tech-item {
+        background: rgba(37, 99, 235, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.8rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .back-link:hover {
+        background: var(--secondary);
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 2rem;
+      }
+
+      @media (max-width: 768px) {
         .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-decoration: none;
+          flex-direction: column;
+          gap: 1rem;
         }
 
         .nav-links a {
-            color: var(--light);
-            margin-left: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s;
+          margin: 0 0.5rem;
         }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .project-header {
-            text-align: center;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .project-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .project-header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: var(--gray);
-        }
-
-        .project-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .detail-card {
-            background: rgba(30, 41, 59, 0.7);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .detail-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(37, 99, 235, 0.5);
-        }
-
-        .detail-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .detail-card ul {
-            list-style-type: none;
-        }
-
-        .detail-card li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .detail-card li::before {
-            content: "▹";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .technologies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .tech-item {
-            background: rgba(37, 99, 235, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.8rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .back-link:hover {
-            background: var(--secondary);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links a {
-                margin: 0 0.5rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <header>
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Omar Alkhayat</a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="projects.html">Projects</a>
-                <a href="#">About</a>
-            </div>
-        </div>
-    </header>
-
+  </head>
+  <body>
     <div class="container">
-        <div class="project-header">
-            <h1>Fleet Management Project</h1>
-            <p>Advanced system for real-time vehicle tracking. I built the entire backend to ensure accurate and efficient tracking.</p>
+      <div class="project-header">
+        <h1>Fleet Management Project</h1>
+        <p>
+          Advanced system for real-time vehicle tracking. I built the entire
+          backend to ensure accurate and efficient tracking.
+        </p>
+      </div>
+
+      <div class="project-details">
+        <div class="detail-card">
+          <h2><i class="fas fa-tasks"></i> Features</h2>
+          <ul>
+            <li>Real-time vehicle tracking using GPS</li>
+            <li>Vehicle location display on map</li>
+            <li>Route, time, and speed reporting</li>
+            <li>Geofencing alerts for entering/exiting zones</li>
+            <li>Driver and vehicle data management</li>
+            <li>API for system integration</li>
+          </ul>
         </div>
 
-        <div class="project-details">
-            <div class="detail-card">
-                <h2><i class="fas fa-tasks"></i> Features</h2>
-                <ul>
-                    <li>Real-time vehicle tracking using GPS</li>
-                    <li>Vehicle location display on map</li>
-                    <li>Route, time, and speed reporting</li>
-                    <li>Geofencing alerts for entering/exiting zones</li>
-                    <li>Driver and vehicle data management</li>
-                    <li>API for system integration</li>
-                </ul>
-            </div>
-
-            <div class="detail-card">
-                <h2><i class="fas fa-tools"></i> Technologies Used</h2>
-                <ul>
-                    <li>Python (Primary programming language)</li>
-                    <li>Django (Web framework)</li>
-                    <li>Django REST Framework (API building)</li>
-                    <li>MySQL (Database)</li>
-                    <li>WebSocket (Real-time communication)</li>
-                    <li>Git (Version control)</li>
-                </ul>
-                <div class="technologies">
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Django</span>
-                    <span class="tech-item">Django REST</span>
-                    <span class="tech-item">MySQL</span>
-                    <span class="tech-item">WebSocket</span>
-                    <span class="tech-item">Git</span>
-                </div>
-            </div>
-
-            <div class="detail-card">
-                <h2><i class="fas fa-user-tie"></i> My Role</h2>
-                <ul>
-                    <li>Built the entire backend system</li>
-                    <li>Designed and implemented the database</li>
-                    <li>Developed APIs for data transmission</li>
-                    <li>Integrated real-time tracking system</li>
-                    <li>Implemented business logic for alerts and reports</li>
-                    <li>Ensured system security and reliability</li>
-                </ul>
-            </div>
+        <div class="detail-card">
+          <h2><i class="fas fa-tools"></i> Technologies Used</h2>
+          <ul>
+            <li>Python (Primary programming language)</li>
+            <li>Django (Web framework)</li>
+            <li>Django REST Framework (API building)</li>
+            <li>MySQL (Database)</li>
+            <li>WebSocket (Real-time communication)</li>
+            <li>Git (Version control)</li>
+          </ul>
+          <div class="technologies">
+            <span class="tech-item">Python</span>
+            <span class="tech-item">Django</span>
+            <span class="tech-item">Django REST</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">WebSocket</span>
+            <span class="tech-item">Git</span>
+          </div>
         </div>
 
-        <a href="projects.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        <div class="detail-card">
+          <h2><i class="fas fa-user-tie"></i> My Role</h2>
+          <ul>
+            <li>Built the entire backend system</li>
+            <li>Designed and implemented the database</li>
+            <li>Developed APIs for data transmission</li>
+            <li>Integrated real-time tracking system</li>
+            <li>Implemented business logic for alerts and reports</li>
+            <li>Ensured system security and reliability</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="../index.html" class="back-link"
+        ><i class="fas fa-arrow-left"></i> Back to Home</a
+      >
     </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2023 Omar Alkhayat. All Rights Reserved.</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2023 Omar Alkhayat. All Rights Reserved.</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

@@ -105,7 +105,9 @@
             margin-bottom: 1rem;
             background: linear-gradient(to right, var(--light), var(--accent));
             -webkit-background-clip: text;
+            background-clip: text; /* Standard property */
             -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback for older browsers */
         }
 
         .hero-content h2 {
@@ -231,40 +233,55 @@
 
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            position: relative;
+            background: rgba(30, 41, 59, 0.7);
             border-radius: 15px;
-            overflow: hidden;
-            height: 300px;
-            background: linear-gradient(45deg, #1e3a8a, #4338ca);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
 
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            z-index: 1;
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(37, 99, 235, 0.5);
         }
 
-        .project-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 1.5rem;
-            z-index: 2;
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
         }
 
-        .project-content h3 {
+        .project-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .project-link:hover {
+            background: var(--secondary);
         }
 
         .certificates {
@@ -412,7 +429,7 @@
                     <p>Git</p>
                 </div>
                 <div class="skill-item">
-                    <i class="fab fa-docker"></i>
+                    <i class="fab fa-python"></i> <!-- Using Python icon as Django alternative -->
                     <p>Django</p>
                 </div>
             </div>
@@ -423,23 +440,40 @@
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="project-grid">
-                <div class="project-card card">
-                    <div class="project-content">
-                        <h3>Finance Bank System</h3>
-                        <p>Employee & branch management departments</p>
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-university"></i>
                     </div>
+                    <h3>Finance Bank System</h3>
+                    <p>System with four departments: employee, customer, loan, and branch management. I fully built branch and employee management as team leader.</p>
+                    <a href="finance-bank.html" class="project-link">View Details</a>
                 </div>
-                <div class="project-card card">
-                    <div class="project-content">
-                        <h3>Search Engine</h3>
-                        <p>Document indexing with Elasticsearch</p>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-search"></i>
                     </div>
+                    <h3>Search Engine</h3>
+                    <p>Part of a search engine capable of reading documents, indexing data, and managing them effectively.</p>
+                    <a href="search-engine.html" class="project-link">View Details</a>
                 </div>
-                <div class="project-card card">
-                    <div class="project-content">
-                        <h3>Fleet Management</h3>
-                        <p>Real-time vehicle tracking system</p>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-truck-moving"></i>
                     </div>
+                    <h3>Fleet Management</h3>
+                    <p>Advanced system for real-time vehicle tracking.</p>
+                    <a href="fleet-management.html" class="project-link">View Details</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Weather Application</h3>
+                    <p>Application allowing users to add favorite cities and inquire about weather worldwide.</p>
+                    <a href="weather-app.html" class="project-link">View Details</a>
                 </div>
             </div>
         </div>

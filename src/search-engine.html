@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine Project | Omar Alkhayat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f97316;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            margin-left: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .project-header {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .project-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+
+        .detail-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-card ul {
+            list-style-type: none;
+        }
+
+        .detail-card li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .detail-card li::before {
+            content: "▹";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background: rgba(37, 99, 235, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Omar Alkhayat</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="#">About</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="project-header">
+            <h1>Search Engine Project</h1>
+            <p>Part of a search engine capable of reading documents, indexing data, and managing them effectively. I focused on building the backend and integrating advanced indexing technologies.</p>
+        </div>
+
+        <div class="project-details">
+            <div class="detail-card">
+                <h2><i class="fas fa-tasks"></i> Features</h2>
+                <ul>
+                    <li>Reading and parsing various document formats</li>
+                    <li>Efficient data indexing using advanced techniques</li>
+                    <li>Fast and accurate search within indexed data</li>
+                    <li>Management and organization of indexed documents</li>
+                    <li>API interface for interacting with the search engine</li>
+                </ul>
+            </div>
+
+            <div class="detail-card">
+                <h2><i class="fas fa-tools"></i> Technologies Used</h2>
+                <ul>
+                    <li>Python (Primary programming language)</li>
+                    <li>Django (Web framework)</li>
+                    <li>Elasticsearch (Search and analytics engine)</li>
+                    <li>REST APIs (For component communication)</li>
+                    <li>Git (Version control)</li>
+                </ul>
+                <div class="technologies">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Django</span>
+                    <span class="tech-item">Elasticsearch</span>
+                    <span class="tech-item">REST API</span>
+                    <span class="tech-item">Git</span>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <h2><i class="fas fa-user-tie"></i> My Role</h2>
+                <ul>
+                    <li>Built the entire backend infrastructure</li>
+                    <li>Developed document reading and parsing mechanisms</li>
+                    <li>Managed integration between Django and Elasticsearch</li>
+                    <li>Set up and managed data indexes</li>
+                    <li>Designed and implemented APIs</li>
+                    <li>Tested performance and indexing effectiveness</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="projects.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Omar Alkhayat. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

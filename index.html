@@ -1,173 +1,581 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Omar Alkhayat - Software Engineer</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background: #f8f9fa;
-      transition: background 0.3s, color 0.3s;
-    }
-    .dark-mode {
-      background: #121212;
-      color: #e0e0e0;
-    }
-    .dark-mode .card, .dark-mode .bg-light {
-      background: #1e1e1e !important;
-      color: #e0e0e0;
-      border-color: #333;
-    }
-    .sidebar {
-      background: #1a3a5f;
-      color: white;
-      min-height: 100vh;
-      padding: 30px 20px;
-    }
-    .profile-img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: #2c5282;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 50px;
-      border: 5px solid white;
-    }
-    #theme-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      background: #1a3a5f;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .lang-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1a3a5f;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 14px;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .project-card {
-      border-left: 4px solid #1a3a5f;
-      transition: transform 0.2s;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar Alkhayat | Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f97316;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-img::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(transparent, var(--accent), transparent 30%);
+            animation: rotate 10s linear infinite;
+        }
+
+        .profile-img::after {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            border-radius: 50%;
+            background: var(--dark);
+            z-index: 1;
+        }
+
+        .profile-placeholder {
+            position: relative;
+            z-index: 2;
+            font-size: 8rem;
+            color: var(--light);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 i {
+            font-size: 1.8rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: rgba(37, 99, 235, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(37, 99, 235, 0.3);
+            transform: scale(1.05);
+        }
+
+        .skill-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            background: linear-gradient(45deg, #1e3a8a, #4338ca);
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 1;
+        }
+
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1.5rem;
+            z-index: 2;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .certificate-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(249, 115, 22, 0.5);
+        }
+
+        .certificate-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="light-mode" id="body">
-  <button id="theme-toggle" onclick="toggleDarkMode()">
-    <i class="fas fa-moon"></i>
-  </button>
-  <a href="index.html" class="lang-toggle">العربية</a>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 sidebar">
-        <div class="profile-img">
-          <i class="fas fa-user"></i>
-        </div>
-        <h1>Omar Ali Alkhayat</h1>
-        <p class="title">Backend Software Engineer</p>
-
-        <div class="contact mt-4">
-          <p><i class="fas fa-phone"></i> +963 982 860 955</p>
-          <p><i class="fas fa-envelope"></i> omaralkhayat09@gmail.com</p>
-          <p><i class="fab fa-github"></i> github.com/omaralkhayat</p>
-          <p><i class="fab fa-linkedin"></i> linkedin.com/in/omaralkhayat</p>
-        </div>
-
-        <div class="skills mt-4">
-          <h5><i class="fas fa-laptop-code"></i> Technical Skills</h5>
-          <ul class="list-unstyled mt-2">
-            <li>Python, C++, HTML, JS</li>
-            <li>Django, REST APIs</li>
-            <li>MySQL, SQL Server</li>
-            <li>Git, Linux</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-8 p-4">
-        <div class="card mb-4 bg-light">
-          <div class="card-body">
-            <h2><i class="fas fa-user"></i> About Me</h2>
-            <p>
-              Highly motivated software engineer with a strong foundation in programming, problem-solving, and project management. Proficient in back-end development with hands-on experience in building robust applications using modern technologies. Passionate about continuous learning and contributing to the tech industry.
-            </p>
-          </div>
-        </div>
-
-        <div class="card mb-4 bg-light">
-          <div class="card-body">
-            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
-            <div class="project-card p-3 mb-3 card">
-              <h5>Finance Bank Project</h5>
-              <p>Built branch & employee management modules. Served as team leader.</p>
+<body>
+    <div id="scene-container"></div>
+    
+    <header>
+        <div class="container">
+            <div class="hero">
+                <div class="profile-img">
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1>Omar Alkhayat</h1>
+                    <h2>Backend Software Engineer</h2>
+                    <p>Highly motivated software engineer with a strong foundation in programming, problem-solving, and project management. Passionate about continuous learning and contributing to the tech industry.</p>
+                    <div class="social-links">
+                        <a href="mailto:omaralkhayat09@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="tel:+963982860955"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="project-card p-3 mb-3 card">
-              <h5>Partial Search Engine</h5>
-              <p>Backend development, document parsing, Django + Elastic Search integration.</p>
-            </div>
-            <div class="project-card p-3 mb-3 card">
-              <h5>Fleet Management System</h5>
-              <p>Developed full backend for real-time vehicle tracking.</p>
-            </div>
-            <div class="project-card p-3 mb-3 card">
-              <h5>Weather App</h5>
-              <p>Allows users to track weather in favorite cities worldwide.</p>
-            </div>
-          </div>
         </div>
+    </header>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card bg-light mb-4">
-              <div class="card-body">
-                <h5><i class="fas fa-graduation-cap"></i> Education</h5>
-                <p><strong>Computer Science</strong> – Antioch Syrian University (2021 - Present)</p>
-              </div>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <p><strong>Computer Science</strong></p>
+                    <p>Antioch Syrian University (2021-Present)</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-language"></i> Languages</h3>
+                    <p>Arabic: Native</p>
+                    <p>English: Good in written & spoken</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                    <p>Successfully managed and delivered multiple solo and team projects</p>
+                    <p>Recognized for creative thinking and innovative problem-solving in university projects</p>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card bg-light mb-4">
-              <div class="card-body">
-                <h5><i class="fas fa-certificate"></i> Certificates</h5>
-                <ul class="list-unstyled">
-                  <li>Introduction to Software Engineering - IBM</li>
-                  <li>Git Version Control - IBM</li>
-                  <li>Web Application Technologies - University of Michigan</li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <script src="theme.js"></script>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-python"></i>
+                    <p>Python</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-js"></i>
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <p>HTML/CSS</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <p>MySQL</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-server"></i>
+                    <p>SQL Server</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-linux"></i>
+                    <p>Linux</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-code-branch"></i>
+                    <p>Git</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-docker"></i>
+                    <p>Django</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                <div class="project-card card">
+                    <div class="project-content">
+                        <h3>Finance Bank System</h3>
+                        <p>Employee & branch management departments</p>
+                    </div>
+                </div>
+                <div class="project-card card">
+                    <div class="project-content">
+                        <h3>Search Engine</h3>
+                        <p>Document indexing with Elasticsearch</p>
+                    </div>
+                </div>
+                <div class="project-card card">
+                    <div class="project-content">
+                        <h3>Fleet Management</h3>
+                        <p>Real-time vehicle tracking system</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="container">
+            <h2 class="section-title">Certificates</h2>
+            <div class="certificates">
+                <div class="certificate-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Web Application Technologies</h3>
+                    <p>University of Michigan</p>
+                </div>
+                <div class="certificate-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Building Web Applications in Django</h3>
+                    <p>University of Michigan</p>
+                </div>
+                <div class="certificate-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Linux Commands & Shell Scripting</h3>
+                    <p>IBM</p>
+                </div>
+                <div class="certificate-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Git & GitHub</h3>
+                    <p>IBM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Omar Alkhayat. All Rights Reserved.</p>
+            <p>Damascus, Syria</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Three.js scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
+
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        
+        const posArray = new Float32Array(particlesCount * 3);
+        const colorArray = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+            colorArray[i] = Math.random();
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        camera.position.z = 5;
+        
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        // Add directional light
+        const directionalLight = new THREE.DirectionalLight(0x4dabf7, 1);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+        
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += 0.0005;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        animate();
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

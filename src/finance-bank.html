@@ -17,17 +17,20 @@
       }
 
       :root {
-        --primary: #2563eb;
-        --secondary: #1e40af;
-        --accent: #f97316;
-        --dark: #0f172a;
-        --light: #f8fafc;
-        --gray: #94a3b8;
+        --primary: #2563EB;
+        --secondary: #7C3AED;
+        --accent: #10B981;
+        --gradient-start: #667eea;
+        --gradient-end: #764ba2;
+        --light: #FFFFFF;
+        --dark: #1F2937;
+        --gray: #6B7280;
+        --card-bg: rgba(255, 255, 255, 0.95);
       }
 
       body {
-        background: linear-gradient(135deg, var(--dark), #1e293b);
-        color: var(--light);
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #f0f9ff);
+        color: var(--dark);
         line-height: 1.6;
       }
 
@@ -35,30 +38,6 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
-      }
-
-      .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      .nav-links a {
-        color: var(--light);
-        margin-left: 1.5rem;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .nav-links a:hover {
-        color: var(--accent);
       }
 
       .project-header {
@@ -70,14 +49,14 @@
       .project-header h1 {
         font-size: 2.5rem;
         margin-bottom: 1rem;
-        color: var(--accent);
+        color: var(--primary);
       }
 
       .project-header p {
         font-size: 1.2rem;
         max-width: 800px;
         margin: 0 auto;
-        color: var(--gray);
+        color: var(--dark);
       }
 
       .project-details {
@@ -88,17 +67,22 @@
       }
 
       .detail-card {
-        background: rgba(30, 41, 59, 0.7);
+        background: var(--card-bg);
         border-radius: 15px;
         padding: 2rem;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.8);
       }
 
       .detail-card:hover {
         transform: translateY(-5px);
-        border-color: rgba(37, 99, 235, 0.5);
+        box-shadow: 
+          0 25px 50px -12px rgba(37, 99, 235, 0.25),
+          0 0 40px rgba(124, 58, 237, 0.15);
+        border-color: var(--primary);
       }
 
       .detail-card h2 {
@@ -110,6 +94,10 @@
         gap: 0.5rem;
       }
 
+      .detail-card h2 i {
+        color: var(--primary);
+      }
+
       .detail-card ul {
         list-style-type: none;
       }
@@ -118,6 +106,7 @@
         margin-bottom: 1rem;
         padding-left: 1.5rem;
         position: relative;
+        color: var(--dark);
       }
 
       .detail-card li::before {
@@ -136,42 +125,51 @@
       }
 
       .tech-item {
-        background: rgba(37, 99, 235, 0.2);
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white;
         padding: 0.5rem 1rem;
         border-radius: 20px;
         font-size: 0.9rem;
+        font-weight: 500;
       }
 
       .back-link {
         display: inline-block;
         margin-top: 2rem;
         padding: 0.8rem 1.5rem;
-        background: var(--primary);
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
         color: white;
         text-decoration: none;
         border-radius: 5px;
-        transition: background 0.3s;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
       }
 
       .back-link:hover {
-        background: var(--secondary);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
       }
 
       footer {
         text-align: center;
         padding: 2rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
         margin-top: 2rem;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      footer p {
+        color: var(--dark);
       }
 
       @media (max-width: 768px) {
-        .nav-container {
-          flex-direction: column;
-          gap: 1rem;
+        .project-header h1 {
+          font-size: 2rem;
         }
-
-        .nav-links a {
-          margin: 0 0.5rem;
+        
+        .project-header p {
+          font-size: 1rem;
         }
       }
     </style>
@@ -237,9 +235,9 @@
         </div>
       </div>
 
-      <a href="../index.html#projects" class="back-link"
-        ><i class="fas fa-arrow-left"></i> Back to Home</a
-      >
+      <a href="../index.html#projects" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
     </div>
 
     <footer>

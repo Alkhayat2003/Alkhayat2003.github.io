@@ -345,6 +345,87 @@
                 font-size: 2.5rem;
             }
         }
+        /* --- Certificates Section Styling --- */
+        .certificates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .certificate-card {
+            position: relative;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            width: 300px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(249, 115, 22, 0.6);
+        }
+
+        .certificate-icon {
+            font-size: 3.5rem;
+            color: #f97316; /* Orange for PDF */
+            margin-bottom: 1rem;
+        }
+
+        .certificate-icon i {
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-card:hover .certificate-icon i {
+            transform: scale(1.2);
+        }
+
+        .certificate-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .certificate-card small {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Overlay Effect on Hover */
+        .certificate-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .certificate-card:hover .certificate-overlay {
+            transform: translateY(0);
+        }
+
+        .certificate-overlay i {
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -490,26 +571,89 @@
     <section id="certificates">
         <div class="container">
             <h2 class="section-title">Certificates</h2>
-            <div class="certificates">
-                <div class="certificate-card">
-                    <i class="fas fa-certificate"></i>
+            <div class="project-grid">
+                <!-- Certificate 1 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
                     <h3>Web Application Technologies</h3>
                     <p>University of Michigan</p>
+                    <a href="assets/certificates/WebApplicationTechnologiesAndDjango.pdf" target="_blank" class="project-link">View Certificate</a>
                 </div>
-                <div class="certificate-card">
-                    <i class="fas fa-certificate"></i>
+
+                <!-- Certificate 2 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
                     <h3>Building Web Applications in Django</h3>
                     <p>University of Michigan</p>
+                    <a href="assets/certificates/BuildingWebApplicationsInDjango.pdf" target="_blank" class="project-link">View Certificate</a>
                 </div>
-                <div class="certificate-card">
-                    <i class="fas fa-certificate"></i>
+
+                <!-- Certificate 3 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
                     <h3>Linux Commands & Shell Scripting</h3>
                     <p>IBM</p>
+                    <a href="assets/certificates/LinuxCommandsAndShellScripting.pdf" target="_blank" class="project-link">View Certificate</a>
                 </div>
-                <div class="certificate-card">
-                    <i class="fas fa-certificate"></i>
+
+                <!-- Certificate 4 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
                     <h3>Git & GitHub</h3>
                     <p>IBM</p>
+                    <br><br><br>
+                    <a href="assets/certificates/GitAndGitHub.pdf" target="_blank" class="project-link">View Certificate</a>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Software Engineering</h3>
+                    <p>IBM</p>
+                    <br><br><br>
+                    <a href="assets/certificates/SoftwareEngCertificate.pdf" target="_blank" class="project-link">View Certificate</a>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Django Application Development with SQL and Databases</h3>
+                    <p>IBM</p>
+                    <a href="assets/certificates/Django Application Development with SQL and Databases.pdf" target="_blank" class="project-link">View Certificate</a>
+                </div>
+
+                <!-- Certificate 7 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Python for Data Science and AI</h3>
+                    <p>IBM</p>
+
+                    <a href="assets/certificates/Python for Data Science and AI.pdf" target="_blank" class="project-link">View Certificate</a>
+                </div>
+
+
+                <!-- Certificate 8 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Python Project for AI and Application Development</h3>
+                    <p>IBM</p>
+                    <a href="assets/certificates/Python Project for AI and Application Development.pdf" target="_blank" class="project-link">View Certificate</a>
                 </div>
             </div>
         </div>

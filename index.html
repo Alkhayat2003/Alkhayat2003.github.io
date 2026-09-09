@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +21,29 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              darkBg: "#0b0f19",
+              darkSecondary: "#111827",
+              darkCard: "rgba(30, 41, 59, 0.4)",
+              darkCardHover: "rgba(30, 41, 59, 0.7)",
+              accent: "#06b6d4",
+              accentHover: "#0891b2",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
     <style>
       :root {
         --bg-primary: #0b0f19;
@@ -31,7 +54,6 @@
         --text-secondary: #94a3b8;
         --text-muted: #64748b;
         --accent: #06b6d4;
-        --accent-hover: #0891b2;
         --accent-glow: rgba(6, 182, 212, 0.2);
         --gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
         --border: rgba(148, 163, 184, 0.1);
@@ -40,806 +62,30 @@
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 80px;
-      }
-
       body {
         font-family: "Inter", sans-serif;
         background-color: var(--bg-primary);
         color: var(--text-secondary);
-        line-height: 1.6;
         overflow-x: hidden;
       }
 
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      ul {
-        list-style: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      .section {
-        padding: 100px 0;
-        position: relative;
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: 60px;
-      }
-
-      .section-subtitle {
-        font-family: "JetBrains Mono", monospace;
-        color: var(--accent);
-        font-size: 0.9rem;
-        font-weight: 500;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        display: block;
-      }
-
-      .section-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 15px;
-      }
-
-      .section-desc {
-        max-width: 600px;
-        margin: 0 auto;
-        color: var(--text-muted);
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 28px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        transition: var(--transition);
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-      }
-
-      .btn-primary {
-        background: var(--gradient);
-        color: white;
-        box-shadow: 0 4px 15px var(--accent-glow);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px var(--accent-glow);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: var(--text-primary);
-        border: 1px solid var(--border);
-      }
-
-      .btn-secondary:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        background: rgba(6, 182, 212, 0.05);
-      }
-
-      /* Navbar Styling */
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        padding: 20px 0;
-        transition: var(--transition);
-      }
-
-      .navbar.scrolled {
-        background: rgba(11, 15, 25, 0.85);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-        padding: 15px 0;
-      }
-
-      .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .nav-logo {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .nav-logo span {
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 32px;
-        align-items: center;
-      }
-
-      .nav-links a {
-        color: var(--text-secondary);
-        font-weight: 500;
-        font-size: 0.95rem;
-        transition: var(--transition);
-        position: relative;
-      }
-
-      .nav-links a:hover,
-      .nav-links a.active {
-        color: var(--accent);
-      }
-
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--accent);
-        transition: var(--transition);
-      }
-
-      .nav-links a:hover::after,
-      .nav-links a.active::after {
-        width: 100%;
-      }
-
-      .nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--text-primary);
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-
-      /* Hero Section Styling */
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(
-          circle,
-          var(--accent-glow) 0%,
-          transparent 70%
-        );
-        border-radius: 50%;
-        z-index: 0;
-        animation: pulse 8s infinite alternate;
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1) translate(0, 0);
-          opacity: 0.5;
-        }
-        100% {
-          transform: scale(1.2) translate(-50px, 50px);
-          opacity: 0.8;
-        }
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 1;
-        max-width: 850px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .hero-greeting {
-        font-family: "JetBrains Mono", monospace;
-        color: var(--accent);
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-        display: block;
-      }
-
-      .hero-name {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        font-weight: 800;
-        color: var(--text-primary);
-        line-height: 1.1;
-        margin-bottom: 10px;
-      }
-
-      .hero-title {
-        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-        font-weight: 700;
-        color: var(--text-muted);
-        margin-bottom: 25px;
-      }
-
-      .hero-title .highlight {
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .hero-desc {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        margin-bottom: 40px;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .hero-socials {
-        margin-top: 50px;
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-      }
-
-      .hero-socials a {
-        color: var(--text-muted);
-        font-size: 1.3rem;
-        transition: var(--transition);
-      }
-
-      .hero-socials a:hover {
-        color: var(--accent);
-        transform: translateY(-3px);
-      }
-
-      /* About Section Styling */
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: center;
-      }
-
-      .about-text p {
-        margin-bottom: 20px;
-        font-size: 1.05rem;
-      }
-
-      .about-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-
-      .stat-card {
+      .glass-card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 25px;
-        text-align: center;
+        backdrop-filter: blur(8px);
         transition: var(--transition);
       }
 
-      .stat-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-5px);
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .stat-label {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-        margin-top: 5px;
-      }
-
-      /* Skills Section Styling */
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-      }
-
-      .skill-category {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 30px;
-        transition: var(--transition);
-      }
-
-      .skill-category:hover {
+      .glass-card:hover {
         border-color: var(--accent);
         background: var(--bg-card-hover);
       }
 
-      .skill-category-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .skill-category-title i {
-        color: var(--accent);
-      }
-
-      .skill-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .skill-tag {
-        background: rgba(6, 182, 212, 0.1);
-        color: var(--accent);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        border: 1px solid rgba(6, 182, 212, 0.2);
-        transition: var(--transition);
-      }
-
-      .skill-tag:hover {
-        background: rgba(6, 182, 212, 0.2);
-        transform: scale(1.05);
-      }
-
-      /* Projects Section Styling */
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 30px;
-      }
-
-      .project-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 30px;
-        transition: var(--transition);
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .project-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
+      .gradient-text {
         background: var(--gradient);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: var(--transition);
-      }
-
-      .project-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-8px);
-        box-shadow: var(--shadow);
-      }
-
-      .project-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      .project-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
-      }
-
-      .project-icon {
-        font-size: 2rem;
-        color: var(--accent);
-      }
-
-      .project-category {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        background: rgba(100, 116, 139, 0.1);
-        padding: 4px 10px;
-        border-radius: 4px;
-      }
-
-      .project-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 15px;
-      }
-
-      .project-desc {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        margin-bottom: 20px;
-        flex-grow: 1;
-      }
-
-      .project-tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 25px;
-      }
-
-      .project-tech span {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-      }
-
-      .project-link {
-        align-self: flex-start;
-        color: var(--accent);
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        transition: var(--transition);
-        cursor: pointer;
-        background: none;
-        border: none;
-        font-family: inherit;
-      }
-
-      .project-link:hover {
-        gap: 10px;
-      }
-
-      /* Education & Certifications */
-      .edu-cert-grid {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 60px;
-      }
-
-      .edu-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 30px;
-        height: fit-content;
-      }
-
-      .edu-card h3 {
-        color: var(--text-primary);
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-      }
-
-      .edu-card .degree {
-        color: var(--accent);
-        font-weight: 600;
-        margin-bottom: 5px;
-      }
-
-      .edu-card .date {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-      }
-
-      .certs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
-      }
-
-      .cert-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 20px;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .cert-card:hover {
-        border-color: var(--accent);
-        transform: translateX(5px);
-      }
-
-      .cert-icon {
-        font-size: 1.5rem;
-        color: var(--accent);
-        min-width: 40px;
-      }
-
-      .cert-info h4 {
-        color: var(--text-primary);
-        font-size: 0.95rem;
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
-
-      .cert-info p {
-        color: var(--text-muted);
-        font-size: 0.8rem;
-      }
-
-      /* Contact Section */
-      .contact-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-      }
-
-      .contact-info h3 {
-        font-size: 1.8rem;
-        color: var(--text-primary);
-        margin-bottom: 20px;
-      }
-
-      .contact-info p {
-        margin-bottom: 30px;
-      }
-
-      .contact-details {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .contact-item-icon {
-        width: 45px;
-        height: 45px;
-        background: rgba(6, 182, 212, 0.1);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent);
-        font-size: 1.1rem;
-      }
-
-      .contact-item-text h4 {
-        color: var(--text-primary);
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-
-      .contact-item-text p,
-      .contact-item-text a {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-      }
-
-      .contact-form {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 40px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        color: var(--text-primary);
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-bottom: 8px;
-      }
-
-      .form-group input,
-      .form-group textarea {
-        width: 100%;
-        padding: 12px 16px;
-        background: var(--bg-secondary);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text-primary);
-        font-family: inherit;
-        font-size: 0.95rem;
-        transition: var(--transition);
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px var(--accent-glow);
-      }
-
-      .form-group textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      /* Footer */
-      .footer {
-        background: var(--bg-secondary);
-        border-top: 1px solid var(--border);
-        padding: 40px 0;
-        text-align: center;
-      }
-
-      .footer p {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-      }
-
-      /* Modal */
-      .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
-        z-index: 2000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-        padding: 20px;
-      }
-
-      .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .modal-content {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        max-width: 800px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 40px;
-        position: relative;
-        transform: translateY(20px);
-        transition: var(--transition);
-      }
-
-      .modal-overlay.active .modal-content {
-        transform: translateY(0);
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: var(--transition);
-      }
-
-      .modal-close:hover {
-        color: var(--text-primary);
-      }
-
-      .modal-title {
-        font-size: 1.8rem;
-        color: var(--text-primary);
-        margin-bottom: 10px;
-      }
-
-      .modal-category {
-        color: var(--accent);
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.85rem;
-        margin-bottom: 20px;
-      }
-
-      .modal-section {
-        margin-bottom: 25px;
-      }
-
-      .modal-section h4 {
-        color: var(--text-primary);
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .modal-section h4 i {
-        color: var(--accent);
-      }
-
-      .modal-section p,
-      .modal-section li {
-        color: var(--text-secondary);
-        line-height: 1.7;
-      }
-
-      .modal-tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .fade-in {
@@ -853,58 +99,6 @@
       .fade-in.visible {
         opacity: 1;
         transform: translateY(0);
-      }
-
-      @media (max-width: 992px) {
-        .about-grid,
-        .edu-cert-grid,
-        .contact-wrapper {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .nav-links {
-          position: fixed;
-          top: 0;
-          right: -100%;
-          width: 70%;
-          height: 100vh;
-          background: var(--bg-secondary);
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 40px;
-          transition: var(--transition);
-          border-left: 1px solid var(--border);
-        }
-
-        .nav-links.active {
-          right: 0;
-        }
-
-        .nav-toggle {
-          display: block;
-          z-index: 1001;
-        }
-
-        .section {
-          padding: 70px 0;
-        }
-
-        .section-title {
-          font-size: 2rem;
-        }
-
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-buttons {
-          flex-direction: column;
-          align-items: flex-start;
-        }
       }
 
       ::-webkit-scrollbar {
@@ -922,456 +116,639 @@
       }
     </style>
   </head>
-  <body>
-    <nav class="navbar" id="navbar">
-      <div class="container nav-container">
-        <a href="#home" class="nav-logo">
-          <i class="fas fa-terminal"></i> Omar<span>.dev</span>
+  <body
+    class="bg-[#0b0f19] text-[#94a3b8] antialiased selection:bg-cyan-500 selection:text-white"
+  >
+    <nav
+      class="navbar fixed top-0 left-0 w-full z-50 py-5 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <a
+          href="#home"
+          class="nav-logo text-xl font-extrabold text-white flex items-center gap-2"
+        >
+          <i class="fas fa-terminal text-cyan-400"></i> Omar<span
+            class="gradient-text"
+            >.dev</span
+          >
         </a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul
+          class="nav-links hidden md:flex gap-8 items-center font-medium text-sm"
+          id="navLinks"
+        >
+          <li>
+            <a href="#home" class="text-cyan-400 transition hover:text-cyan-400"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="#about" class="transition hover:text-cyan-400">About</a>
+          </li>
+          <li>
+            <a href="#skills" class="transition hover:text-cyan-400">Skills</a>
+          </li>
+          <li>
+            <a href="#projects" class="transition hover:text-cyan-400"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a href="#education" class="transition hover:text-cyan-400"
+              >Education</a
+            >
+          </li>
+          <li>
+            <a href="#contact" class="transition hover:text-cyan-400"
+              >Contact</a
+            >
+          </li>
           <li>
             <a
               href="assets/CV.pdf"
               target="_blank"
-              class="btn btn-secondary"
-              style="padding: 8px 16px; font-size: 0.85rem"
-              ><i class="fas fa-file-pdf"></i> My CV</a
+              class="px-4 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-cyan-400 hover:text-cyan-400 transition flex items-center gap-2 text-xs"
             >
+              <i class="fas fa-file-pdf"></i> My CV
+            </a>
           </li>
         </ul>
-        <button class="nav-toggle" id="navToggle">
+        <button
+          class="nav-toggle md:hidden text-white text-xl focus:outline-none"
+          id="navToggle"
+        >
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </nav>
 
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <span class="hero-greeting">// Hello world, I'm</span>
-          <h1 class="hero-name">Omar Ali Alkhayat</h1>
-          <h2 class="hero-title">
-            Backend Software Engineer <span class="highlight">&</span> Technical
-            Team Lead
-          </h2>
-          <p class="hero-desc">
-            Results-driven Backend Software Engineer with extensive hands-on
-            expertise in architecting scalable backend systems, robust REST
-            APIs, and advanced AI integrations. Proficient in Python/Django
-            alongside modern frameworks like FastAPI, Spring Boot, and NestJS.
-          </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary"
-              ><i class="fas fa-code"></i> View Projects</a
-            >
-            <a href="#contact" class="btn btn-secondary"
-              ><i class="fas fa-paper-plane"></i> Contact Me</a
-            >
-          </div>
-          <div class="hero-socials">
-            <a
-              href="https://www.linkedin.com/in/omar-ali-alkhayat-0717a839b"
-              target="_blank"
-              title="LinkedIn"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a href="mailto:omaralkhayat09@gmail.com" title="Email"
-              ><i class="fas fa-envelope"></i
-            ></a>
-            <a href="tel:+963982860955" title="Phone"
-              ><i class="fas fa-phone"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="section-subtitle">01 // About Me</span>
-          <h2 class="section-title">Architecting Scalable Systems & AI</h2>
-        </div>
-        <div class="about-grid">
-          <div class="about-text fade-in">
-            <p>
-              Results-driven Backend Software Engineer specializing in scalable
-              backend architectures, robust REST APIs, and cutting-edge AI
-              integrations.
-            </p>
-            <p>
-              Proven leadership capabilities in guiding cross-functional
-              development teams through complex, high-impact technical projects
-              from conception to production with a strong focus on clean
-              architecture and performance optimization.
-            </p>
-            <p>
-              Based in Damascus, Syria, fluent in Arabic (Native) and English
-              (Professional Working Proficiency).
-            </p>
-          </div>
-          <div class="about-stats fade-in">
-            <div class="stat-card">
-              <div class="stat-number">5+</div>
-              <div class="stat-label">Core Systems & Projects</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">2+</div>
-              <div class="stat-label">Years of Engineering Experience</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">10+</div>
-              <div class="stat-label">Professional Certifications</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">100%</div>
-              <div class="stat-label">Production Delivery</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="section-subtitle">02 // Technical Skills</span>
-          <h2 class="section-title">My Tech Stack</h2>
-          <p class="section-desc">
-            Comprehensive tools and technologies aligned with my professional
-            backend and AI engineering experience.
-          </p>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">
-              <i class="fas fa-server"></i> Backend Frameworks
-            </h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Django</span>
-              <span class="skill-tag">Django REST Framework</span>
-              <span class="skill-tag">FastAPI</span>
-              <span class="skill-tag">Spring Boot</span>
-              <span class="skill-tag">NestJS</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">
-              <i class="fas fa-code"></i> Programming Languages
-            </h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">C++</span>
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">TypeScript</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">
-              <i class="fas fa-brain"></i> AI & Machine Learning
-            </h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Neural Networks</span>
-              <span class="skill-tag">Deep Reinforcement Learning</span>
-              <span class="skill-tag">PPO / IPPO / MAPPO</span>
-              <span class="skill-tag">RAG Pipelines</span>
-              <span class="skill-tag">LLM Integration</span>
-              <span class="skill-tag">PyTorch</span>
-              <span class="skill-tag">scikit-learn</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in">
-            <h3 class="skill-category-title">
-              <i class="fas fa-database"></i> Databases & Tools
-            </h3>
-            <div class="skill-tags">
-              <span class="skill-tag">MySQL</span>
-              <span class="skill-tag">SQL Server</span>
-              <span class="skill-tag">SQLite</span>
-              <span class="skill-tag">Elasticsearch</span>
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">REST APIs</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="section-subtitle">03 // Portfolio</span>
-          <h2 class="section-title">Software Engineering Experience</h2>
-          <p class="section-desc">
-            Key professional and graduation projects reflecting my hands-on
-            backend and AI expertise.
-          </p>
-        </div>
-        <div class="projects-grid" id="projectsGrid">
-          <!-- Projects injected via JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="section-subtitle">04 // Background</span>
-          <h2 class="section-title">Education & Certifications</h2>
-        </div>
-        <div class="edu-cert-grid">
-          <div class="edu-card fade-in">
-            <h3>
-              <i
-                class="fas fa-graduation-cap"
-                style="color: var(--accent); margin-right: 10px"
-              ></i>
-              Education
-            </h3>
-            <div class="degree">
-              B.Sc. in Computer Engineering and Informatics
-            </div>
-            <div class="date">Antioch Syrian University | 2021 - Aug 2026</div>
-            <p style="margin-top: 15px; font-size: 0.9rem">
-              <strong style="color: var(--text-primary)">Languages:</strong
-              ><br />
-              Arabic: Native<br />
-              English: Professional Working Proficiency
-            </p>
-          </div>
-          <div class="certs-grid fade-in">
-            <div class="cert-card">
-              <a
-                href="assets/certificates/SoftwareEngCertificate.pdf"
-                target="_blank"
-              >
-                <i class="fas fa-laptop-code cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Software Engineering</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/Django Application Development with SQL and Databases.pdf"
-                target="_blank"
-              >
-                <i class="fas fa-database cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Django App Development with SQL</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/Python for Data Science and AI.pdf"
-                target="_blank"
-              >
-                <i class="fab fa-python cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Python for Data Science and AI</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/Python Project for AI and Application Development.pdf"
-                target="_blank"
-              >
-                <i class="fas fa-code-branch cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Python Project for AI and Application Development</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/BuildingWebApplicationsInDjango.pdf"
-                target="_blank"
-              >
-                <i class="fas fa-cubes cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Building Web Applications in Django</h4>
-                  <p>IBM / Coursera</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/LinuxCommandsAndShellScripting.pdf"
-                target="_blank"
-              >
-                <i class="fab fa-linux cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Linux Commands & Shell Scripting</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a href="assets/certificates/GitAndGitHub.pdf" target="_blank">
-                <i class="fab fa-git-alt cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Git and GitHub</h4>
-                  <p>IBM</p>
-                </div>
-              </a>
-            </div>
-            <div class="cert-card">
-              <a
-                href="assets/certificates/WebApplicationTechnologiesAndDjango.pdf"
-              >
-                <i class="fas fa-globe cert-icon"></i>
-                <div class="cert-info">
-                  <h4>Web App Tech & Django</h4>
-                  <p>University of Michigan</p>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="section-subtitle">05 // Get In Touch</span>
-          <h2 class="section-title">Let's Work Together</h2>
-        </div>
-        <div style="max-width: 700px; margin: 0 auto">
-          <div
-            class="contact-info fade-in"
-            style="
-              background: var(--bg-card);
-              border: 1px solid var(--border);
-              border-radius: var(--radius);
-              padding: 40px;
-              text-align: center;
-            "
+    <section
+      id="home"
+      class="min-h-screen flex items-center justify-center text-center relative px-6 overflow-hidden pt-20"
+    >
+      <div
+        class="absolute -top-1/2 -right-1/4 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse"
+      ></div>
+      <div class="max-w-3xl mx-auto z-10">
+        <span class="font-mono text-cyan-400 text-sm md:text-base mb-4 block"
+          >// Hello world, I'm</span
+        >
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-white mb-3 tracking-tight"
+        >
+          Omar Ali Alkhayat
+        </h1>
+        <h2 class="text-xl md:text-3xl font-bold text-slate-400 mb-6">
+          Backend Software Engineer
+          <span class="gradient-text">&</span> Technical Team Lead
+        </h2>
+        <p
+          class="text-base md:text-lg text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto"
+        >
+          Results-driven Backend Software Engineer with extensive hands-on
+          expertise in architecting scalable backend systems, robust REST APIs,
+          and advanced AI integrations. Proficient in Python/Django alongside
+          modern frameworks like FastAPI, Spring Boot, and NestJS.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="#projects"
+            class="px-7 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:translate-y-[-2px] transition flex items-center gap-2"
           >
-            <h3
-              style="
-                font-size: 1.8rem;
-                color: var(--text-primary);
-                margin-bottom: 20px;
-              "
-            >
-              Let's build something amazing.
-            </h3>
-            <p style="margin-bottom: 30px; color: var(--text-secondary)">
-              I'm currently open to new backend software engineering
-              opportunities and technical collaborations. Reach out directly via
-              email, phone, or LinkedIn!
-            </p>
-            <div
-              class="contact-details"
-              style="
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 20px;
-                text-align: left;
-              "
-            >
-              <div class="contact-item">
-                <div class="contact-item-icon">
-                  <i class="fas fa-envelope"></i>
-                </div>
-                <div class="contact-item-text">
-                  <h4>Email</h4>
-                  <a href="mailto:omaralkhayat09@gmail.com"
-                    >omaralkhayat09@gmail.com</a
-                  >
-                </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-item-icon">
-                  <i class="fas fa-phone"></i>
-                </div>
-                <div class="contact-item-text">
-                  <h4>Phone</h4>
-                  <a href="tel:+963982860955">+963 982 860 955</a>
-                </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-item-icon">
-                  <i class="fab fa-linkedin"></i>
-                </div>
-                <div class="contact-item-text">
-                  <h4>LinkedIn</h4>
-                  <a
-                    href="https://www.linkedin.com/in/omar-ali-alkhayat-0717a839b"
-                    target="_blank"
-                    >View LinkedIn Profile</a
-                  >
-                </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-item-icon">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="contact-item-text">
-                  <h4>Location</h4>
-                  <p>Damascus, Syria</p>
-                </div>
-              </div>
+            <i class="fas fa-code"></i> View Projects
+          </a>
+          <a
+            href="#contact"
+            class="px-7 py-3 rounded-lg border border-slate-700 text-white font-semibold hover:border-cyan-400 hover:text-cyan-400 transition flex items-center gap-2"
+          >
+            <i class="fas fa-paper-plane"></i> Contact Me
+          </a>
+        </div>
+        <div class="mt-12 flex gap-6 justify-center text-xl text-slate-500">
+          <a
+            href="https://www.linkedin.com/in/omar-ali-alkhayat-0717a839b"
+            target="_blank"
+            class="hover:text-cyan-400 transition hover:scale-110"
+            title="LinkedIn"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="mailto:omaralkhayat09@gmail.com"
+            class="hover:text-cyan-400 transition hover:scale-110"
+            title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a
+            href="tel:+963982860955"
+            class="hover:text-cyan-400 transition hover:scale-110"
+            title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="text-center mb-16 fade-in">
+        <span
+          class="font-mono text-cyan-400 text-xs md:text-sm font-medium tracking-widest uppercase mb-2 block"
+          >01 // About Me</span
+        >
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          Architecting Scalable Systems & AI
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-4 text-base md:text-lg text-slate-300 fade-in">
+          <p>
+            Results-driven Backend Software Engineer specializing in scalable
+            backend architectures, robust REST APIs, and cutting-edge AI
+            integrations.
+          </p>
+          <p>
+            Proven leadership capabilities in guiding cross-functional
+            development teams through complex, high-impact technical projects
+            from conception to production with a strong focus on clean
+            architecture and performance optimization.
+          </p>
+          <p class="text-slate-400">
+            Based in Damascus, Syria, fluent in Arabic (Native) and English
+            (Professional Working Proficiency).
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 fade-in">
+          <div class="glass-card p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">
+              7+
+            </div>
+            <div class="text-xs md:text-sm text-slate-400">
+              Core Systems & Projects
+            </div>
+          </div>
+          <div class="glass-card p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">
+              2+
+            </div>
+            <div class="text-xs md:text-sm text-slate-400">
+              Years of Engineering Experience
+            </div>
+          </div>
+          <div class="glass-card p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">
+              10+
+            </div>
+            <div class="text-xs md:text-sm text-slate-400">
+              Professional Certifications
+            </div>
+          </div>
+          <div class="glass-card p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold gradient-text mb-1">
+              100%
+            </div>
+            <div class="text-xs md:text-sm text-slate-400">
+              Production Delivery
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="modal-overlay" id="projectModal">
-      <div class="modal-content">
-        <button class="modal-close" id="modalClose">
+    <section id="skills" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="text-center mb-16 fade-in">
+        <span
+          class="font-mono text-cyan-400 text-xs md:text-sm font-medium tracking-widest uppercase mb-2 block"
+          >02 // Technical Skills</span
+        >
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          My Tech Stack
+        </h2>
+        <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
+          Comprehensive tools and technologies aligned with my professional
+          backend and AI engineering experience.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-6 fade-in">
+          <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-server text-cyan-400"></i> Backend Frameworks
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Django</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Django REST</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >FastAPI</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Spring Boot</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >NestJS</span
+            >
+          </div>
+        </div>
+        <div class="glass-card p-6 fade-in">
+          <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-code text-cyan-400"></i> Languages
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Python</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >C++</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >HTML/CSS</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >JavaScript</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >TypeScript</span
+            >
+          </div>
+        </div>
+        <div class="glass-card p-6 fade-in">
+          <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-brain text-cyan-400"></i> AI & ML
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Neural Networks</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Deep RL</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >PPO / MAPPO</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >RAG Pipelines</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >PyTorch</span
+            >
+          </div>
+        </div>
+        <div class="glass-card p-6 fade-in">
+          <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-database text-cyan-400"></i> Databases & Tools
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >MySQL</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >SQL Server</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Elasticsearch</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >Git & Linux</span
+            >
+            <span
+              class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-medium border border-cyan-500/20"
+              >REST APIs</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="text-center mb-16 fade-in">
+        <span
+          class="font-mono text-cyan-400 text-xs md:text-sm font-medium tracking-widest uppercase mb-2 block"
+          >03 // Portfolio</span
+        >
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          Software Engineering Experience
+        </h2>
+        <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
+          Key professional and graduation projects reflecting my hands-on
+          backend and AI expertise.
+        </p>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="projectsGrid"
+      >
+        <!-- Dynamically populated via JS -->
+      </div>
+    </section>
+
+    <section id="education" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="text-center mb-16 fade-in">
+        <span
+          class="font-mono text-cyan-400 text-xs md:text-sm font-medium tracking-widest uppercase mb-2 block"
+          >04 // Background</span
+        >
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          Education & Certifications
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="glass-card p-8 fade-in lg:col-span-1">
+          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-graduation-cap text-cyan-400"></i> Education
+          </h3>
+          <div class="text-cyan-400 font-semibold text-lg mb-1">
+            B.Sc. in Computer Engineering and Informatics
+          </div>
+          <div class="text-slate-400 text-sm mb-4">
+            Antioch Syrian University | 2021 - Aug 2026
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            <strong class="text-white">Languages:</strong><br />
+            Arabic: Native<br />
+            English: Professional Working Proficiency
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-in lg:col-span-2"
+          id="certsGrid"
+        >
+          <!-- Cert cards -->
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/SoftwareEngCertificate.pdf" target="_blank">
+            <i class="fas fa-laptop-code text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Software Engineering
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/Django Application Development with SQL and Databases.pdf" target="_blank">
+            <i class="fas fa-database text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Django App Dev with SQL
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/Python for Data Science and AI.pdf" target="_blank">
+            <i class="fab fa-python text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Python for Data Science & AI
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/Python Project for AI and Application Development.pdf" target="_blank">
+            <i class="fas fa-code-branch text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Python Project for AI
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/BuildingWebApplicationsInDjango.pdf" target="_blank">
+            <i class="fas fa-cubes text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Web Apps in Django
+              </h4>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/LinuxCommandsAndShellScripting.pdf" target="_blank">
+            <i class="fab fa-linux text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Linux & Shell Scripting
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/GitAndGitHub.pdf" target="_blank">
+            <i class="fab fa-github fa-git text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                Git & GitHub
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+          <div
+            class="glass-card p-5 flex items-center gap-4 hover:translate-x-1 transition"
+          >
+          <a href="assets/certificates/WebApplicationTechnologiesAndDjango.pdf" target="_blank">
+            <i class="fas fa-globe text-cyan-400 text-2xl"></i>
+            <div>
+              <h4 class="text-white font-semibold text-sm">
+                web App Tech & Django
+              </h4>
+              <p class="text-slate-400 text-xs">IBM</p>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 max-w-5xl mx-auto px-6 relative">
+      <div class="text-center mb-16 fade-in">
+        <span
+          class="font-mono text-cyan-400 text-xs md:text-sm font-medium tracking-widest uppercase mb-2 block"
+          >05 // Get In Touch</span
+        >
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          Let's Work Together
+        </h2>
+      </div>
+      <div class="glass-card p-8 md:p-12 text-center fade-in">
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+          Let's build something amazing.
+        </h3>
+        <p class="text-slate-300 max-w-xl mx-auto mb-8 text-sm md:text-base">
+          I'm currently open to new backend software engineering opportunities
+          and technical collaborations. Reach out directly via email, phone, or
+          LinkedIn!
+        </p>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left max-w-2xl mx-auto"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center text-cyan-400 text-lg"
+            >
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h4
+                class="text-white text-xs font-semibold tracking-wider"
+              >
+                Email
+              </h4>
+              <a
+                href="mailto:omaralkhayat09@gmail.com"
+                class="text-slate-300 text-sm hover:text-cyan-400 transition"
+                >omaralkhayat09@gmail.com</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center text-cyan-400 text-lg"
+            >
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <h4
+                class="text-white text-xs font-semibold tracking-wider"
+              >
+                Phone
+              </h4>
+              <a
+                href="tel:+963982860955"
+                class="text-slate-300 text-sm hover:text-cyan-400 transition"
+                >+963 982 860 955</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center text-cyan-400 text-lg"
+            >
+              <i class="fab fa-linkedin"></i>
+            </div>
+            <div>
+              <h4
+                class="text-white text-xs font-semibold tracking-wider"
+              >
+                LinkedIn
+              </h4>
+              <a
+                href="https://www.linkedin.com/in/omar-ali-alkhayat-0717a839b"
+                target="_blank"
+                class="text-slate-300 text-sm hover:text-cyan-400 transition"
+                >View Profile</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center text-cyan-400 text-lg"
+            >
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h4
+                class="text-white text-xs font-semibold tracking-wider"
+              >
+                Location
+              </h4>
+              <p class="text-slate-300 text-sm">Damascus, Syria</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div
+      class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300"
+      id="projectModal"
+    >
+      <div
+        class="glass-card max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 relative transform translate-y-6 transition-all duration-300"
+        id="modalContainer"
+      >
+        <button
+          class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl"
+          id="modalClose"
+        >
           <i class="fas fa-times"></i>
         </button>
+        <h2 class="text-2xl font-bold text-white mb-2" id="modalTitle"></h2>
+        <p class="font-mono text-cyan-400 text-xs mb-6" id="modalCategory"></p>
 
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <p class="modal-category" id="modalCategory"></p>
-
-        <div class="modal-section">
-          <h4>
-            <i class="fas fa-info-circle"></i> Project Details & Key
-            Achievements
-          </h4>
-          <p id="modalDetails"></p>
-        </div>
-
-        <div class="modal-section">
-          <h4><i class="fas fa-user-cog"></i> Role & Team</h4>
-          <p id="modalRole"></p>
-        </div>
-
-        <div class="modal-section">
-          <h4><i class="fas fa-tools"></i> Tools & Technologies</h4>
-          <div class="modal-tech" id="modalTech"></div>
+        <div class="space-y-6 text-slate-300 text-sm">
+          <div>
+            <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+              <i class="fas fa-info-circle text-cyan-400"></i> Details &
+              Achievements
+            </h4>
+            <p id="modalDetails" class="leading-relaxed"></p>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+              <i class="fas fa-user-cog text-cyan-400"></i> Role & Team
+            </h4>
+            <p id="modalRole"></p>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+              <i class="fas fa-tools text-cyan-400"></i> Technologies
+            </h4>
+            <div class="flex flex-wrap gap-2 mt-2" id="modalTech"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <p>
-          &copy; 2025 Omar Ali Alkhayat. Crafted with ❤️ and lots of ☕
-        </p>
+    <footer
+      class="bg-[#111827] border-t border-slate-800 py-8 text-center text-slate-500 text-sm"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <p>&copy; 2025 Omar Ali Alkhayat. Crafted with ❤️ and lots of ☕</p>
       </div>
     </footer>
 
     <script>
-      // Projects Data exactly matching CV details
       const projects = [
         {
           title: "Multi-Agent RL for Adaptive Traffic Signal Control",
@@ -1392,21 +769,14 @@
           ],
         },
         {
-          title: "MTNSYR - Telecom Data Warehouse & Analytics Platform",
-          category: "Data & Backend Engineer • 2026",
-          icon: "fa-database",
-          desc: "Built an ETL pipeline reconciling telecom subscriber data into a robust five-table star schema with predictive ML models.",
+          title: "Document Search Engine",
+          category: "Backend Engineer • 2024",
+          icon: "fa-search",
+          desc: "Architected a modular search and retrieval backend system for efficient document indexing and querying.",
           details:
-            "• Developed a Random Forest customer-lifetime-value model and spend-segment classifier.\n• Designed and deployed a comprehensive 9-page analytics dashboard accessible via a single CLI.",
-          role: "Data & Backend Engineer | Team of 2",
-          tech: [
-            "Python",
-            "pandas",
-            "scikit-learn",
-            "SQLite",
-            "Streamlit",
-            "Plotly",
-          ],
+            "• Built robust indexing and search pipelines for high-performance document retrieval.\n• Integrated backend storage and query matching to deliver lightning-fast search results.",
+          role: "Backend Engineer | Team of 3",
+          tech: ["Python", "Elasticsearch", "REST APIs", "SQLite"],
         },
         {
           title: "Banking Management System",
@@ -1436,11 +806,11 @@
         },
         {
           title: "HIV Therapy Optimization with Genetic Algorithms",
-          category: "AI Backend Engineering • 2024",
+          category: "AI Backend Engineering • 2025",
           icon: "fa-heartbeat",
           desc: "Engineered an AI-driven clinical decision support system optimizing HIV antiretroviral therapy protocols based on WHO 2024 guidelines.",
           details:
-            "• Architected a multi-objective fitness engine balancing clinical efficacy, toxicity, cost, and patient adherence.\n• Integrated resistance mapping and clinical constraint validations.",
+            "• Architected a multi-objective fitness engine balancing clinical efficacy, toxicity, cost, and patient adherence.\n• Integrated Stanford HIVDB for resistance mapping and clinical constraint validations.",
           role: "AI Backend Engineer | Team of 2",
           tech: [
             "Python",
@@ -1449,66 +819,104 @@
             "Data Analysis",
           ],
         },
+        {
+          title: "AI Chat Assistant",
+          category: "AI Backend Engineering • 2025",
+          icon: "fa-robot",
+          desc: "Architected a modular Python AI Chat Assistant featuring dual Rich terminal and Tkinter GUI interfaces, multi-LLM routing, and persistent session storage.",
+          details:
+            "• Developed the core LLM abstraction layer and delivered a polished, production-ready frontend and backend integration.\n• Implemented intelligent rate-limiting with robust retry mechanisms.",
+          role: "AI Backend Engineer (Solo Project)",
+          tech: ["Python", "Rich", "Tkinter", "LLM APIs", "REST APIs"],
+        },
+        {
+          title: "MTNSYR - Telecom Data Warehouse & Analytics Platform",
+          category: "Data & Backend Engineer • 2026",
+          icon: "fa-database",
+          desc: "Built an ETL pipeline reconciling telecom subscriber data into a robust five-table star schema with predictive ML models.",
+          details:
+            "• Developed a Random Forest customer-lifetime-value model and spend-segment classifier.\n• Designed and deployed a comprehensive 9-page analytics dashboard accessible via a single CLI.",
+          role: "Data & Backend Engineer | Team of 2",
+          tech: [
+            "Python",
+            "pandas",
+            "scikit-learn",
+            "SQLite",
+            "Streamlit",
+            "Plotly",
+          ],
+        },
       ];
 
-      // Render Projects
+      // Render Projects Cards
       const projectsGrid = document.getElementById("projectsGrid");
-
-      projects.forEach((project, index) => {
+      projects.forEach((proj, idx) => {
         const card = document.createElement("div");
-        card.className = "project-card fade-in";
+        card.className =
+          "glass-card p-6 flex flex-col justify-between fade-in hover:translate-y-[-4px]";
         card.innerHTML = `
-            <div class="project-header">
-                <i class="fas ${project.icon} project-icon"></i>
-                <span class="project-category">${project.category.split("•")[0].trim()}</span>
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <i class="fas ${proj.icon} text-cyan-400 text-2xl"></i>
+              <span class="font-mono text-xs text-slate-400">${proj.category.split("•")[0].trim()}</span>
             </div>
-            <h3 class="project-title">${project.title}</h3>
-            <p class="project-desc">${project.desc}</p>
-            <div class="project-tech">
-                ${project.tech
-                  .slice(0, 4)
-                  .map((t) => `<span>${t}</span>`)
-                  .join(" • ")}
-                ${project.tech.length > 4 ? `<span>+${project.tech.length - 4} more</span>` : ""}
+            <h3 class="text-lg font-bold text-white mb-2">${proj.title}</h3>
+            <p class="text-slate-300 text-sm mb-4 leading-relaxed">${proj.desc}</p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              ${proj.tech
+                .slice(0, 3)
+                .map(
+                  (t) =>
+                    `<span class="bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded text-[10px] font-mono">${t}</span>`,
+                )
+                .join("")}
+              ${proj.tech.length > 3 ? `<span class="bg-slate-800/80 text-slate-400 px-2 py-0.5 rounded text-[10px] font-mono">+${proj.tech.length - 3}</span>` : ""}
             </div>
-            <button class="project-link" data-index="${index}">
-                View Details <i class="fas fa-arrow-right"></i>
+            <button class="text-cyan-400 hover:text-cyan-300 text-sm font-semibold flex items-center gap-2 transition project-btn" data-index="${idx}">
+              View Details <i class="fas fa-arrow-right text-xs"></i>
             </button>
+          </div>
         `;
         projectsGrid.appendChild(card);
       });
 
-      // Modal Logic
+      // Modal Elements & Listeners
       const modal = document.getElementById("projectModal");
+      const modalContainer = document.getElementById("modalContainer");
       const modalClose = document.getElementById("modalClose");
-      let currentActiveProject = null;
 
-      document.querySelectorAll(".project-link").forEach((btn) => {
+      document.querySelectorAll(".project-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           const index = btn.getAttribute("data-index");
-          const project = projects[index];
-          currentActiveProject = project;
+          const p = projects[index];
 
-          document.getElementById("modalTitle").textContent = project.title;
-          document.getElementById("modalCategory").textContent =
-            project.category;
-
-          const formattedDetails = project.details.replace(/\n/g, "<br>");
-          document.getElementById("modalDetails").innerHTML = formattedDetails;
-          document.getElementById("modalRole").textContent = project.role;
+          document.getElementById("modalTitle").textContent = p.title;
+          document.getElementById("modalCategory").textContent = p.category;
+          document.getElementById("modalDetails").innerHTML = p.details.replace(
+            /\n/g,
+            "<br>",
+          );
+          document.getElementById("modalRole").textContent = p.role;
 
           const techContainer = document.getElementById("modalTech");
-          techContainer.innerHTML = project.tech
-            .map((t) => `<span class="skill-tag">${t}</span>`)
+          techContainer.innerHTML = p.tech
+            .map(
+              (t) =>
+                `<span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono border border-cyan-500/20">${t}</span>`,
+            )
             .join("");
 
-          modal.classList.add("active");
+          modal.classList.remove("opacity-0", "pointer-events-none");
+          modalContainer.classList.remove("translate-y-6");
           document.body.style.overflow = "hidden";
         });
       });
 
       function closeModal() {
-        modal.classList.remove("active");
+        modal.classList.add("opacity-0", "pointer-events-none");
+        modalContainer.classList.add("translate-y-6");
         document.body.style.overflow = "";
       }
 
@@ -1520,52 +928,56 @@
         if (e.key === "Escape") closeModal();
       });
 
-      // Navbar Scroll & Mobile Toggle
+      // Navigation & Scroll Animations
       const navbar = document.getElementById("navbar");
       const navToggle = document.getElementById("navToggle");
       const navLinks = document.getElementById("navLinks");
 
       window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
+        if (window.scrollY > 40) {
+          navbar.classList.add(
+            "bg-[#0b0f19]/80",
+            "backdrop-blur-md",
+            "border-b",
+            "border-slate-800/80",
+          );
         } else {
-          navbar.classList.remove("scrolled");
+          navbar.classList.remove(
+            "bg-[#0b0f19]/80",
+            "backdrop-blur-md",
+            "border-b",
+            "border-slate-800/80",
+          );
         }
       });
 
       navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-        const icon = navToggle.querySelector("i");
-        icon.classList.toggle("fa-bars");
-        icon.classList.toggle("fa-times");
+        navLinks.classList.toggle("hidden");
+        navLinks.classList.toggle("flex");
+        navLinks.classList.toggle("absolute");
+        navLinks.classList.toggle("top-full");
+        navLinks.classList.toggle("left-0");
+        navLinks.classList.toggle("w-full");
+        navLinks.classList.toggle("bg-[#111827]");
+        navLinks.classList.toggle("p-6");
+        navLinks.classList.toggle("flex-col");
+        navLinks.classList.toggle("shadow-xl");
       });
 
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("active");
-          const icon = navToggle.querySelector("i");
-          icon.classList.add("fa-bars");
-          icon.classList.remove("fa-times");
-        });
-      });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      );
 
-      // Scroll Animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll(".fade-in").forEach((el) => {
-        observer.observe(el);
-      });
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>
